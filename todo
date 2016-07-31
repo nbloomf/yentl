@@ -1,0 +1,51 @@
+Known Bugs
+==========
+* ToCartesian instance for Poincare Disc is broken (Type II lines, segments, rays)
+
+
+Next Thing
+==========
+* "finish" properties for the geometries
+* need test for approximateWithin
+* start theorem library
+* build demo
+* replace provably unreachable errors with irrefutable patterns
+* in CartesianPlane model, use orientation matrix for areCollinear
+* should interpolate/interpolateH be a class? ("RealPath" or some such)
+* models should not export constructors (use coords instead?)
+* tests for Curve instances
+* should theorems be in test modules?
+
+
+Soonish
+=======
+* page size in view options
+* SemiCircle equation type
+* Curve instances for SemiCircle, Ray
+
+
+Eventually
+==========
+* model ellipses, hyperbolas in Algebra.Equation (needed for disc models)
+* implement klein disc model of elliptic geometry
+* implement euclidean disc model
+* beltrami disc model of hyperbolic geometry
+* alternative output formats: SVG, TikZ, animate with GLOSS
+* setopacity :: Fig a -> Fig a (alter all draw commands?)
+* elliptic geometry? (will need alternate class hierarchy)
+* origami?
+* major arc equation type
+* elliptic arcs (?)
+
+
+Ongoing
+=======
+* Implement theorems; include in test suite
+* illustrate theorems; include in demo
+* beef up test suite for Algebra library (need to test equations)
+
+
+Maybe Someday
+=============
+* interactive graphical output (?)
+* make CartesianPlane & PoincarePlane types more general (e.g. CartesianPlane t)

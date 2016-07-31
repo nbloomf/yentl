@@ -1,0 +1,50 @@
+Name:           yentl
+Version:        0.0.0
+Cabal-Version:  >= 1.2
+License:        GPL-3
+Copyright:      (c) 2016 Nathan Bloomfield
+Author:         Nathan Bloomfield
+Synopsis:       A simple geometry library
+Stability:      Experimental
+Build-Type:     Simple
+
+
+library
+  exposed-modules: Yentl
+
+  hs-source-dirs: src/
+
+  build-depends:
+    base == 4.7.0.2,
+    toysolver == 0.4.0
+
+
+
+executable yentl-demo
+  main-is: Main.hs
+
+  hs-source-dirs: src/
+
+  ghc-options: -fforce-recomp
+
+  build-depends:
+    base == 4.7.0.2,
+    toysolver == 0.4.0,
+    constructible == 0.1.0.1
+
+
+
+executable yentl-test
+  main-is: Main.hs
+
+  hs-source-dirs: test/, src/
+
+  ghc-options: -fforce-recomp
+
+  build-depends:
+    base == 4.7.0.2,
+    QuickCheck == 2.8.2,
+    tasty == 0.11.0.3,
+    tasty-quickcheck == 0.8.4,
+    toysolver == 0.4.0,
+    constructible == 0.1.0.1

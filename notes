@@ -1,0 +1,5 @@
+-- convert eps frames to gif:
+convert -dispose previous ani*.eps ani.gif
+
+-- convert eps frames to png frames
+for i in `seq -w 0 30`; do convert ani$i.eps -resize 400x400 -depth 4 -strip ani$i.png; done
