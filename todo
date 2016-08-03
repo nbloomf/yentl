@@ -8,11 +8,10 @@ Next Thing
 * "finish" properties for the geometries
 * need test for approximateWithin
 * start theorem library
-* build demo
 * replace provably unreachable errors with irrefutable patterns
 * in CartesianPlane model, use orientation matrix for areCollinear
 * should interpolate/interpolateH be a class? ("RealPath" or some such)
-* models should not export constructors (use coords instead?)
+* models should not export constructors (use coordsMaybe instead?)
 * tests for Curve instances
 * should theorems be in test modules?
 

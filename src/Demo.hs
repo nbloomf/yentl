@@ -45,6 +45,7 @@ demo = sequence_
       demoImg fig EPS vOpts "demo/001/" "001.eps"
         "Drawing of a triangle in the cartesian plane.\n"
 
+
   , let
       fig :: Rational -> Fig CartesianPlane ()
       fig t = do
