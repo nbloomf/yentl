@@ -26,7 +26,7 @@ instance Show PoincarePlane where
 
 
 instance Coords PoincarePlane where
-  coords a b = do
+  coords (a,b) = do
     if b <= 0
       then report $ BadCoordinates (a,b)
       else return $ H { unH = (fromRational a, fromRational b) }

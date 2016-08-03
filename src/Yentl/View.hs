@@ -18,18 +18,15 @@ writeFormat format opts xs = case format of
 
 
 animate :: (ToCartesian t, Show t)
-  => (ConReal -> Fig t ()) -> AnimateOpts -> ViewOpts -> Format -> String -> IO ()
-animate fig aOpts vOpts format name = do
-  let (lo,hi,num) = (optStartT aOpts, optEndT aOpts, optNumFrames aOpts)
-  let dt = fromRational $ (hi - lo)/(fromIntegral num)
+  => (Rational -> Fig t a) -> AnimateOpts -> ViewOpts -> FilePath -> String -> IO ()
+animate fig aOpts vOpts path name = do
   let
+    (lo,hi,num) = (optStartT aOpts, optEndT aOpts, optNumFrames aOpts)
+    dt = fromRational $ (hi - lo)/(fromIntegral num)
     frame k = do
-      let
-        pic = case view (fig $ (fromRational lo) + (fromIntegral k)*dt) of
-          Left err -> error $ show err
-          Right cs -> cs
-      let file = writeFormat format vOpts pic
-      writeFile (name ++ pad num k ++ ".eps") file
+      pic <- viewIO $ fig (lo + (fromIntegral k)*dt)
+      let file = writeFormat EPS vOpts pic
+      writeFile (path ++ name ++ "-" ++ pad num k ++ ".eps") file
   sequence_ $ map frame [0..num]
 
 

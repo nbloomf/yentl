@@ -49,3 +49,4 @@ Maybe Someday
 =============
 * interactive graphical output (?)
 * make CartesianPlane & PoincarePlane types more general (e.g. CartesianPlane t)
+* option to view "scaffolding" in e.g. poincare disc

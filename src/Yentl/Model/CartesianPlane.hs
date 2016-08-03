@@ -26,7 +26,7 @@ instance Show CartesianPlane where
 
 
 instance Coords CartesianPlane where
-  coords a b = return $ P { unP = (fromRational a, fromRational b) }
+  coords (a,b) = return $ P { unP = (fromRational a, fromRational b) }
 
 
 

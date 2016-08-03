@@ -24,7 +24,7 @@ mkPoincareDisc (x,y) = if x^2 + y^2 >= 1
   else Just $ PD (x,y)
 
 instance (Fractional a) => Coords (PoincareDisc a) where
-  coords x y = if x^2 + y^2 >= 1
+  coords (x,y) = if x^2 + y^2 >= 1
     then report $ BadCoordinates (fromRational x, fromRational y)
     else return $ PD { unPD = (fromRational x, fromRational y) }
 

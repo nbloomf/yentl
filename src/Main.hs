@@ -1,20 +1,13 @@
 module Main where
 
 import Yentl
+import Demo
 
 main :: IO ()
-main = testAnim
+main = demo
 
 
-vOpts = defaultViewOptsFixed
-aOpts = defaultAnimateOpts
-
-viewOptsUnitDisc :: ViewOpts
-viewOptsUnitDisc = ViewOpts
-  { optBoundingBox = Fixed ((-11/10,-11/10),(11/10,11/10))  
-  , optViewWindow  = ((0,0),(200,200))
-  , optPageSize    = (200, 200)
-  }
+{-
 
 
 fig2 :: Fig (PoincareDisc ConReal) ()
@@ -109,7 +102,4 @@ pic2 t = do
   return ()
 
 
-demoImage :: (ToCartesian t) => Fig t a -> String -> ViewOpts -> IO ()
-demoImage = undefined
-
-
+-}

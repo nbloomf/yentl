@@ -1,38 +1,52 @@
 module Yentl.View.Options (
-  ViewOpts(..),
-  defaultViewOptsFixed,
-  defaultViewOptsBestFit,
-  BoundingBoxOpt(..),
+  ViewOpts(..), BoundingBoxOpt(..),
+  defaultView, discView, fixed, bestFit,
 
   AnimateOpts(..),
-  defaultAnimateOpts
+  defaultAnimate, startAt, endAt, frames
 ) where
 
+
+{----------------}
+{- View Options -}
+{----------------}
 
 data ViewOpts = ViewOpts
   { optBoundingBox :: BoundingBoxOpt
   , optViewWindow  :: ((Rational, Rational), (Rational, Rational))
   , optPageSize    :: (Int, Int)
-  }
- 
-defaultViewOptsFixed :: ViewOpts
-defaultViewOptsFixed = ViewOpts
+  } deriving Show
+
+data BoundingBoxOpt
+  = Fixed ((Rational, Rational), (Rational, Rational))
+  | BestFit Rational -- margin
+  deriving Show
+
+defaultView :: ViewOpts
+defaultView = ViewOpts
   { optBoundingBox = Fixed ((-20,-20),(20,20))
   , optViewWindow  = ((0,0),(200,200))
   , optPageSize    = (200, 200)
   }
 
-defaultViewOptsBestFit :: ViewOpts
-defaultViewOptsBestFit = ViewOpts
-  { optBoundingBox = BestFit 10  
+discView :: ViewOpts
+discView = ViewOpts
+  { optBoundingBox = Fixed ((-11/10,-11/10),(11/10,11/10))  
   , optViewWindow  = ((0,0),(200,200))
   , optPageSize    = (200, 200)
   }
 
-data BoundingBoxOpt
-  = Fixed ((Rational, Rational), (Rational, Rational))
-  | BestFit Rational -- margin
+fixed :: ((Rational, Rational), (Rational, Rational)) -> ViewOpts -> ViewOpts
+fixed bounds opts = opts { optBoundingBox = Fixed bounds }
 
+bestFit :: Rational -> ViewOpts -> ViewOpts
+bestFit margin opts = opts { optBoundingBox = BestFit margin }
+
+
+
+{-------------------}
+{- Animate Options -}
+{-------------------}
 
 data AnimateOpts = AnimateOpts
   { optStartT    :: Rational
@@ -40,8 +54,17 @@ data AnimateOpts = AnimateOpts
   , optNumFrames :: Int
   }
 
-defaultAnimateOpts = AnimateOpts
+defaultAnimate = AnimateOpts
   { optStartT    = 0
   , optEndT      = 1
   , optNumFrames = 30
   }
+
+startAt :: Rational -> AnimateOpts -> AnimateOpts
+startAt x opts = opts { optStartT = x }
+
+endAt :: Rational -> AnimateOpts -> AnimateOpts
+endAt x opts = opts { optEndT = x }
+
+frames :: Int -> AnimateOpts -> AnimateOpts
+frames k opts = opts { optNumFrames = k }

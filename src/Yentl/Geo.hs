@@ -1,5 +1,5 @@
 module Yentl.Geo (
-  Fig, view, report, assert, pen, isValid, execute,
+  Fig, view, viewIO, report, assert, pen, isValid, execute,
 
   Coords, coords,
 
@@ -43,6 +43,13 @@ view x = case runGeo x of
   (Left e, _)  -> Left e
   (Right _, w) -> Right w
 
+viewIO :: (Show v) => Geo u v a -> IO [u]
+viewIO x = case runGeo x of
+  (Left e, _) -> do
+    putStrLn $ show e
+    return []
+  (Right _, w) -> return w
+
 quietly :: Geo u v a -> Geo u v a
 quietly x = case runGeo x of
   (Left e, _)  -> report e
@@ -72,7 +79,7 @@ pen sty x = do
   return x
 
 class Coords t where
-  coords :: Rational -> Rational -> Fig t t
+  coords :: (Rational, Rational) -> Fig t t
 
 
 
