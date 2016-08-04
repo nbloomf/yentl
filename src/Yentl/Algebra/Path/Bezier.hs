@@ -17,8 +17,8 @@ path p t = case p of
   LinearPath a b -> a +. (t @. (b -. a))
 
   CirclePath (ox,oy) r a s ->
-    ( ox + r*(cosRatD $ (fromRational s)*(t + (fromRational a)))
-    , oy + r*(sinRatD $ (fromRational s)*(t + (fromRational a)))
+    ( ox + r*(cosRatD $ 360*(fromRational s)*(t + (fromRational a)))
+    , oy + r*(sinRatD $ 360*(fromRational s)*(t + (fromRational a)))
     )
 
   BezierPath ps -> modSum $ zipWith (@.) coef ps
