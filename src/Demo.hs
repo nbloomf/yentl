@@ -55,6 +55,7 @@ demo = do
     , demo004
     , demo005
     , demo006
+    , demo007
     ]
   return ()
 
@@ -184,5 +185,34 @@ demo006 chan = do
     aOpts = frames 100 defaultAnimate
   demoAni chan fig vOpts aOpts "demo/006/" "006" $
     "Construction of an antipode in the cartesian plane.\n" ++
+    "(Antipode of blue through red at green.)\n"
+
+
+demo007 :: Chan String -> IO ()
+demo007 chan = do
+  let
+    fig :: Rational -> Fig PoincarePlane ()
+    fig t = do
+      a <- coords $ path (CirclePath (0,5) 4    0  1) t
+      o <- coords $ path (CirclePath (0,5) 3 (1/2) 2) t
+      if a == o
+        then do
+          pen plain o
+          return ()
+        else do
+          x <- pointBefore o a
+          c <- circle o a >>= pen plain
+          let Just b = cutCircleRay (o,a) x
+          r <- ray o x >>= pen plain
+          pen plain x
+          pen red o
+          pen blue a
+          pen green b
+          return ()
+
+    vOpts = fixed ((-6,-1),(6,12)) defaultView
+    aOpts = frames 100 defaultAnimate
+  demoAni chan fig vOpts aOpts "demo/007/" "007" $
+    "Construction of an antipode in the poincare plane.\n" ++
     "(Antipode of blue through red at green.)\n"
 
