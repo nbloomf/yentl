@@ -31,7 +31,8 @@ executable yentl-demo
   build-depends:
     base == 4.7.0.2,
     toysolver == 0.4.0,
-    constructible == 0.1.0.1
+    constructible == 0.1.0.1,
+    async == 2.1.0
 
 
 
