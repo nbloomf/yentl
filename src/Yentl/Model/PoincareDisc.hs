@@ -389,7 +389,8 @@ instance (Ord a, Num a, Fractional a, A.SquareRoot a, A.ApproximateRational a)
 -- which are coterminal to x and y (in some order) such that
 -- y' - x' is in (0,180)
 fixAngles :: Rational -> Rational -> (Rational, Rational)
-fixAngles a b =
-  if 0 <= b - a && b - a < 180
-    then (a,b)
-    else (b,a)
+fixAngles a b
+  | 0 <= b - a && b - a <= 180 = (a, b)
+  | 180 < b - a                = (b, a + 360)
+  | -180 <= b - a && b - a < 0 = (b, a)
+  | otherwise                  = (a, b + 360)

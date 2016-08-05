@@ -50,12 +50,14 @@ demo = do
   forkIO $ writer chan
   mapConcurrently ($ chan)
     [ demo001
-    , demo002
-    , demo003
-    , demo004
-    , demo005
-    , demo006
-    , demo007
+    --, demo002
+    --, demo003
+    --, demo004
+    --, demo005
+    --, demo006
+    --, demo007
+    --, demo008
+    , demo009
     ]
   return ()
 
@@ -216,3 +218,52 @@ demo007 chan = do
     "Construction of an antipode in the poincare plane.\n" ++
     "(Antipode of blue through red at green.)\n"
 
+
+demo008 :: Chan String -> IO ()
+demo008 chan = do
+  let
+    fig :: Rational -> Fig (PoincareDisc ConReal) ()
+    fig t = do
+      a <- coords $ path (CirclePath (0,0) (1/2)    0  1) t
+      o <- coords $ path (CirclePath (0,0) (1/3) (1/2) 2) t
+      if a == o
+        then do
+          pen plain o
+          return ()
+        else do
+          x <- pointBefore o a
+          c <- circle o a >>= pen plain
+          let Just b = cutCircleRay (o,a) x
+          r <- ray o x >>= pen plain
+          pen plain x
+          pen red o
+          pen blue a
+          pen green b
+          return ()
+
+    vOpts = discView
+    aOpts = frames 100 defaultAnimate
+  demoAni chan fig vOpts aOpts "demo/008/" "008" $
+    "Construction of an antipode in the poincare disc.\n" ++
+    "(Antipode of blue through red at green.)\n"
+
+
+demo009 :: Chan String -> IO ()
+demo009 chan = do
+  let
+    fig :: Rational -> Fig (PoincareDisc ConReal) ()
+    fig t = do
+      p1 <- coords $ path (CirclePath (0,2/3) (2/9) (0/3) 1) t
+      p2 <- coords $ path (CirclePath (0,2/3) (2/9) (1/3) 1) t
+      p3 <- coords $ path (CirclePath (0,2/3) (2/9) (2/3) 1) t
+      let ps = [p1,p2,p3]
+      segment p1 p2 >>= pen red
+      segment p2 p3 >>= pen blue
+      segment p3 p1 >>= pen green
+      sequence $ map (pen plain) ps
+      return ()
+
+    vOpts = discView
+    aOpts = frames 100 defaultAnimate
+  demoAni chan fig vOpts aOpts "demo/009/" "009" $
+    "Rotating triangle in the poincare disc.\n"
