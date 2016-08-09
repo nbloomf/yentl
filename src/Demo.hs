@@ -6,6 +6,7 @@ import Control.Concurrent
 import Control.Monad (forever)
 import Control.Concurrent.Chan
 import Control.Concurrent.Async
+import Yentl.Output
 
 
 writer :: Chan String -> IO ()
@@ -50,13 +51,13 @@ demo = do
   forkIO $ writer chan
   mapConcurrently ($ chan)
     [ demo001
-    --, demo002
-    --, demo003
-    --, demo004
-    --, demo005
-    --, demo006
-    --, demo007
-    --, demo008
+    , demo002
+    , demo003
+    , demo004
+    , demo005
+    , demo006
+    , demo007
+    , demo008
     , demo009
     ]
   return ()
@@ -253,17 +254,38 @@ demo009 chan = do
   let
     fig :: Rational -> Fig (PoincareDisc ConReal) ()
     fig t = do
-      p1 <- coords $ path (CirclePath (0,2/3) (2/9) (0/3) 1) t
-      p2 <- coords $ path (CirclePath (0,2/3) (2/9) (1/3) 1) t
-      p3 <- coords $ path (CirclePath (0,2/3) (2/9) (2/3) 1) t
+      let c1 = path (CirclePath (0,0) (2/3) 0 (-1)) t
+      p1 <- coords $ path (CirclePath c1 (2/9) (0/3) 2) t
+      p2 <- coords $ path (CirclePath c1 (2/9) (1/3) 2) t
+      p3 <- coords $ path (CirclePath c1 (2/9) (2/3) 2) t
       let ps = [p1,p2,p3]
       segment p1 p2 >>= pen red
       segment p2 p3 >>= pen blue
       segment p3 p1 >>= pen green
       sequence $ map (pen plain) ps
+
+      let c2 = path (CirclePath (0,0) (2/3) (1/3) (-1)) t
+      q1 <- coords $ path (CirclePath c2 (2/9) (1/3) 2) t
+      q2 <- coords $ path (CirclePath c2 (2/9) (2/3) 2) t
+      q3 <- coords $ path (CirclePath c2 (2/9) (0/3) 2) t
+      let qs = [q1,q2,q3]
+      segment q1 q2 >>= pen red
+      segment q2 q3 >>= pen blue
+      segment q3 q1 >>= pen green
+      sequence $ map (pen plain) qs
+
+      let c3 = path (CirclePath (0,0) (2/3) (2/3) (-1)) t
+      r1 <- coords $ path (CirclePath c3 (2/9) (2/3) 2) t
+      r2 <- coords $ path (CirclePath c3 (2/9) (0/3) 2) t
+      r3 <- coords $ path (CirclePath c3 (2/9) (1/3) 2) t
+      let rs = [r1,r2,r3]
+      segment r1 r2 >>= pen red
+      segment r2 r3 >>= pen blue
+      segment r3 r1 >>= pen green
+      sequence $ map (pen plain) rs
       return ()
 
     vOpts = discView
     aOpts = frames 100 defaultAnimate
   demoAni chan fig vOpts aOpts "demo/009/" "009" $
-    "Rotating triangle in the poincare disc.\n"
+    "Rotating triangles in the poincare disc.\n"

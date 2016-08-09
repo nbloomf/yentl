@@ -6,6 +6,7 @@ module Yentl (
   module Yentl.Model,
   module Yentl.View,
   module Yentl.Algebra.Path,
+  module Yentl.Output,
 
   ConReal
 ) where
@@ -18,3 +19,4 @@ import Yentl.Model
 import Yentl.View
 import Yentl.Algebra (ConReal)
 import Yentl.Algebra.Path
+import Yentl.Output

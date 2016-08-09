@@ -1,6 +1,5 @@
 Known Bugs
 ==========
-* ToCartesian instance for Poincare Disc is broken (Type II lines, segments, rays)
 
 
 Next Thing
