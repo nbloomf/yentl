@@ -61,6 +61,8 @@ makes the construction happen in the Poincare half-plane model.
 
 ![Demo image](/doc/gfx/readme-ex2.png)
 
+This figure description is actually copied from the theorem library. There, it is wrapped up in a function called ``copySegmentToRay``, and can be used to build more complicated figures. It also shows up in the test suite, where the construction can be checked (exactly) in each model on random inputs.
+
 ## Contents
 
 This package provides the Yentl library and two programs.
