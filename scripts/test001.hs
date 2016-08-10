@@ -17,5 +17,5 @@ vOpts = fixed ((-3,-1),(3,4)) defaultView
 
 
 main :: IO ()
-main = writeImg fig EPS vOpts "test001" "001.eps" $
+main = writeImg fig EPS vOpts "test001/" "001.eps" $
   "Drawing of a triangle in the poincare plane.\n"
