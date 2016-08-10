@@ -289,3 +289,4 @@ demo009 chan = do
     aOpts = frames 100 defaultAnimate
   demoAni chan fig vOpts aOpts "demo/009/" "009" $
     "Rotating triangles in the poincare disc.\n"
+
