@@ -2,11 +2,21 @@
 
 Yentl is a synthetic geometry DSL in Haskell.
 
-We can think of synthetic Euclidean geometry as an abstract algorithmic language. With an appropriate interpreter, statements in this language may be interpreted as drawings. Yentl is intended to act as such an interpreter.
+We can think of synthetic Euclidean geometry as an abstract algorithmic language. With an appropriate interpreter, statements in this language may be interpreted as drawings. Yentl is intended to act as such an interpreter. This project is a companion to my College Geometry class notes, available [here](http://nbloomf.github.io/pages/geo-notes.html).
+
+The DSL consists of a few basic parts.
+
+* A handful of type classes which model the technology available in geometries of various kinds (like *lines*, *angles*, *incidence*, *betweenness*, and *congruence*).
+* Instances of these type classes representing (at the moment) the cartesian plane, the poincare half-plane, and the poincare disc. More models to come. These are implemented using exact arithmetic, so that (for instance) we can ask whether two points are the same and be certain that the answer is correct. (Floating point arithmetic can't do this!)
+* A monad (``Fig``) in which we can describe constructions (in terms of the geometry type classes) that handles errors, logging, and IO behind the scenes.
+* A small but growing library of constructions and theorems, ready to use.
+* A suite of tests that checks our theorems in each model.
+
+At the moment documentation is nonexistent, but there are several examples in ``src/Yentl/Demo.hs`` and ``scripts/``.
 
 ## Example
 
-Here is an example drawing: this demonstrates how to copy a given segment (in blue) onto a given ray (in green).
+Here is an example drawing: this demonstrates how to copy a given segment (in blue) onto a given ray (in green). This example is ``scripts/test002.hs``.
 
 ```
 fig :: Fig CartesianPlane ()
@@ -40,6 +50,8 @@ fig = do
 Running this script produces the following image.
 
 ![Demo image](/doc/gfx/readme-ex1.png)
+
+Well, almost -- the script makes an eps (vector) image, which I've converted to png here.
 
 The type signature specifies that this construction takes place in the ordinary Cartesian plane model of euclidean geometry. Changing the signature to
 
