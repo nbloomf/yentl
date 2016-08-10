@@ -2,13 +2,13 @@
 
 Yentl is a synthetic geometry DSL in Haskell.
 
-We can think of synthetic Euclidean geometry as an abstract algorithmic language. With an appropriate interpreter, statements in this language may be interpreted as drawings. Yentl is intended to act as such an interpreter. This project is a companion to my College Geometry class notes, available [here](http://nbloomf.github.io/pages/geo-notes.html).
+We can think of synthetic Euclidean geometry as a declarative language. With an appropriate interpreter, statements in this language can be "executed" to produce drawings. Yentl is intended to act as such an interpreter. This project is a companion to my College Geometry class notes, available [here](http://nbloomf.github.io/pages/geo-notes.html).
 
 The DSL consists of a few basic parts.
 
 * A handful of type classes which model the technology available in geometries of various kinds (like *lines*, *angles*, *incidence*, *betweenness*, and *congruence*).
-* Instances of these type classes representing (at the moment) the cartesian plane, the poincare half-plane, and the poincare disc. More models to come. These are implemented using exact arithmetic, so that (for instance) we can ask whether two points are the same and be certain that the answer is correct. (Floating point arithmetic can't do this!)
-* A monad (``Fig``) in which we can describe constructions (in terms of the geometry type classes) that handles errors, logging, and IO behind the scenes.
+* Instances of these type classes representing (at the moment) the cartesian plane, the poincare half-plane, and the poincare disc. More models to come. These are implemented using exact arithmetic, so that, for example, we can ask whether two points are the same and be certain that the answer is correct. (Floating point arithmetic can't do this!)
+* A monad (``Fig``) that handles errors, logging, and IO behind the scenes.
 * A small but growing library of constructions and theorems, ready to use.
 * A suite of tests that checks our theorems in each model.
 
@@ -74,7 +74,6 @@ This package provides the Yentl library and two programs.
 ## Features
 
 * All arithmetic is exact. This is slow but eliminates a large class of errors.
-* Because all arithmetic is exact, we can (and do!) write a suite of automated tests of geometric theorems.
 * Diagrams are written first to a very small internal representation and then converted to EPS. Other output formats can be implemented by writing a converter from the IR.
 
 ## Using yentl
