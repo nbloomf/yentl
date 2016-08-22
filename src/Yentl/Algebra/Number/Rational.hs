@@ -27,9 +27,15 @@ sqrtWithin eps r =
 
     tooBad (_,err) = err >= eps
 
+instance SquareRoot Rational where
+  root2 = sqrtWithin (1/10^6)
+
 
 class ApproximateRational t where
   approximateWithin :: Rational -> t -> Rational
+
+instance ApproximateRational Rational where
+  approximateWithin _ x = x
 
 arctan2 :: (Rational, Rational) -> Rational
 arctan2 (x,y) =
