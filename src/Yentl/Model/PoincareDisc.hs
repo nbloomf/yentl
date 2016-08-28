@@ -56,8 +56,6 @@ lineType a@(ax,ay) b@(bx,by) = do
 idealPoints :: (Ord a, Num a, Fractional a, A.SquareRoot a)
   => (a,a) -> (a,a) -> Maybe ((a,a),(a,a))
 idealPoints a@(ax,ay) b@(bx,by) = do
-  let True = ax^2 + ay^2 < 1
-  let True = bx^2 + by^2 < 1
   t <- lineType a b
   let unit = A.ceCenterRadius (a A.-. a) 1
   case t of

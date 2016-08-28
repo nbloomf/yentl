@@ -19,17 +19,17 @@ import Test.Model.PoincareDisc
 
 main :: IO ()
 main = defaultMain $ testGroup "testing"
-  [ testAlgebra (0::Rational) "Rational"
-  , testAlgebra (0::ConReal)  "ConReal"
+  [ --testAlgebra (0::Rational) "Rational"
+--  , testAlgebra (0::ConReal)  "ConReal"
 
-  , testLinearForm       (0::ConReal) "ConReal"
-  , testSegmentEquation  (0::ConReal) "ConReal"
-  , testCircleEquation   (0::ConReal) "ConReal"
-  , testMinorArcEquation (0::ConReal) "ConReal"
+--  , testLinearForm       (0::ConReal) "ConReal"
+--  , testSegmentEquation  (0::ConReal) "ConReal"
+--  , testCircleEquation   (0::ConReal) "ConReal"
+--  , testMinorArcEquation (0::ConReal) "ConReal"
 
-  , testAlgPoint
-  , testPoincareDisc (originPoincareDisc :: PoincareDisc ConReal)
-  , testHypPoint
+--  , testAlgPoint
+   testPoincareDisc (originPoincareDisc :: PoincareDisc ConReal)
+--  , testHypPoint
   ]
 
 
